@@ -13,7 +13,7 @@ import {
 //entities
 import { UserDetail } from './user.detail.entity';
 
-@Entity('Users')
+@Entity('User')
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
   pk_user: number;

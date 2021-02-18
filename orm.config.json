@@ -4,7 +4,7 @@
   "password": "postgres",
   "host": "localhost",
   "port": 5444,
-  "database": "bookstore",
+  "database": "bookstores",
   "entities": ["src/**/**/*.entity{.ts,.js}"],
   "migrations": ["src/@core/database/migrations/*{.ts,.js}"],
   "cli": {

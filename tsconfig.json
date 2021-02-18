@@ -10,6 +10,16 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    /* "moduleResolution": "node",
+    "paths": {
+      // core project
+      "@core/*": ["@core/*"],
+      // shared project
+      "@shared/*": ["@shared/*"],
+      // components module
+      "@components/*": ["components/*"]
+    }, */
+
     "incremental": true
   }
 }

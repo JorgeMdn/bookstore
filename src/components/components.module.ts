@@ -4,15 +4,16 @@ import { Module } from '@nestjs/common';
 import { UsersModule } from './users/users.module';
 import { RoleModule } from './role/role.module';
 
-//controllers list
+//modules list
 const MODULES = [UsersModule, RoleModule];
 
 // providers list
 const PROVIDERS = [];
-// providers list
-const EXPORTS = [];
+// exports list
+const EXPORTS = [...MODULES];
 
 @Module({
   imports: [...MODULES],
+  exports: [...EXPORTS],
 })
 export class ComponentsModule {}
