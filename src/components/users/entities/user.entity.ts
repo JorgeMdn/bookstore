@@ -2,12 +2,14 @@ import { Role } from '../../role/entities/role.entity';
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   JoinTable,
   ManyToMany,
   OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 //entities
@@ -35,22 +37,22 @@ export class User extends BaseEntity {
   @JoinColumn({ name: 'fk_detail' })
   details: UserDetail;
 
-  @ManyToMany((type) => Role, (role) => role.users)
+  @ManyToMany((type) => Role, (role) => role.users, { eager: true })
   @JoinTable({ name: 'UserRole' })
   roles: Role[];
 
   @Column({ type: 'int', default: 1 })
   status: number;
 
-  @Column({ type: 'timestamp', name: 'created_at' })
+  @CreateDateColumn({ type: 'timestamp', name: 'created_at' })
   createdAt: Date;
 
-  @Column({ type: 'timestamp', name: 'updated_at' })
+  @UpdateDateColumn({ type: 'timestamp', name: 'updated_at' })
   updatedAt: Date;
 
-  @Column({ type: 'timestamp', name: 'created_by' })
+  @Column({ type: 'timestamp', name: 'created_by', nullable: true })
   createdBy: Date;
 
-  @Column({ type: 'timestamp', name: 'updated_by' })
+  @Column({ type: 'timestamp', name: 'updated_by', nullable: true })
   updatedBy: Date;
 }

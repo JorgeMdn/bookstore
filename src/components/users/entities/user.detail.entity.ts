@@ -1,9 +1,11 @@
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('UserDetail')
@@ -11,7 +13,7 @@ export class UserDetail extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
   pk_user_detail: number;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: true })
   name: string;
 
   @Column({ type: 'varchar', nullable: true })
@@ -23,15 +25,12 @@ export class UserDetail extends BaseEntity {
   @Column({ type: 'int', default: 1 })
   status: number;
 
-  @Column({ type: 'timestamp', name: 'created_at' })
+  @CreateDateColumn({ type: 'timestamp', name: 'created_at', nullable: true })
   createdAt: Date;
 
-  @Column({ type: 'timestamp', name: 'updated_at' })
+  @UpdateDateColumn({ type: 'timestamp', name: 'updated_at', nullable: true })
   updatedAt: Date;
 
-  @Column({ type: 'timestamp', name: 'created_by' })
-  createdBy: Date;
-
-  @Column({ type: 'timestamp', name: 'updated_by' })
+  @Column({ type: 'timestamp', name: 'updated_by', nullable: true })
   updatedBy: Date;
 }

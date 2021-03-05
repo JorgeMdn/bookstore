@@ -16,6 +16,9 @@ import { UpdateUserDto } from './dto/update-user.dto';
 // entities
 import { User } from './entities/user.entity';
 import { UserRepository } from './entities/user.repository';
+import { UserDetail } from './entities/user.detail.entity';
+import { getConnection } from 'typeorm';
+import { Role } from '../role/entities/role.entity';
 
 @Injectable()
 export class UsersService {
@@ -25,6 +28,11 @@ export class UsersService {
     private readonly _mapperService: MapperService,
   ) {}
   async create(user: User): Promise<UserDto> {
+    const details = new UserDetail();
+    user.details = details;
+    const repo = await getConnection().getRepository(Role);
+    const defaulRole = await repo.findOne({ where: { name: 'GENERAL' } });
+    user.roles = [defaulRole];
     const savedUser: User = await this._userRepository.save(user);
     return this._mapperService.map<User, UserDto>(savedUser, new UserDto());
   }

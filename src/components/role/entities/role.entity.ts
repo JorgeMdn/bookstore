@@ -2,10 +2,12 @@ import { User } from '../../users/entities/user.entity';
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('Role')
@@ -26,15 +28,15 @@ export class Role extends BaseEntity {
   @Column({ type: 'int', default: 1 })
   status: number;
 
-  @Column({ type: 'timestamp', name: 'created_at' })
+  @CreateDateColumn({ type: 'timestamp', name: 'created_at' })
   createdAt: Date;
 
-  @Column({ type: 'timestamp', name: 'updated_at' })
+  @UpdateDateColumn({ type: 'timestamp', name: 'updated_at' })
   updatedAt: Date;
 
-  @Column({ type: 'timestamp', name: 'created_by' })
+  @Column({ type: 'timestamp', name: 'created_by', nullable: true })
   createdBy: Date;
 
-  @Column({ type: 'timestamp', name: 'updated_by' })
+  @Column({ type: 'timestamp', name: 'updated_by', nullable: true })
   updatedBy: Date;
 }

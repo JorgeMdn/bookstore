@@ -1,4 +1,5 @@
 export enum Configuration {
+  NODE_ENV = 'NODE_ENV',
   PORT = 'PORT',
 
   // postgres config
