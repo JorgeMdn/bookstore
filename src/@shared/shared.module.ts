@@ -1,13 +1,12 @@
 import { Module } from '@nestjs/common';
-import { MapperService } from './providers/mapper.service';
 
 //controllers list
 const MODULES = [];
 
 // providers list
-const PROVIDERS = [MapperService];
+const PROVIDERS = [];
 // providers list
-const EXPORTS = [MapperService];
+const EXPORTS = [];
 
 @Module({
   imports: [...MODULES],

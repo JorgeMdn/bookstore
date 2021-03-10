@@ -19,7 +19,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() user: User): Promise<UserDto> {
+  create(@Body() user: User): Promise<User> {
     return this.usersService.create(user);
   }
 
@@ -29,7 +29,7 @@ export class UsersController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: string): Promise<UserDto> {
+  findOne(@Param('id', ParseIntPipe) id: string): Promise<User> {
     return this.usersService.findOne(+id);
   }
 
