@@ -3,9 +3,10 @@ import { Module } from '@nestjs/common';
 // modules
 import { UsersModule } from './users/users.module';
 import { RoleModule } from './role/role.module';
+import { AuthModule } from './auth/auth.module';
 
 //modules list
-const MODULES = [UsersModule, RoleModule];
+const MODULES = [UsersModule, RoleModule, AuthModule];
 
 // providers list
 const PROVIDERS = [];
