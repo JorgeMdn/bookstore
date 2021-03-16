@@ -7,43 +7,51 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { UserDto } from './dto/user.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly _userService: UsersService) {}
 
   @Post()
   create(@Body() user: User): Promise<User> {
-    return this.usersService.create(user);
+    return this._userService.create(user);
   }
 
+  @UseGuards(AuthGuard())
   @Get()
   findAll(): Promise<User[]> {
-    return this.usersService.findAll();
+    return this._userService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: string): Promise<User> {
-    return this.usersService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<User> {
+    return this._userService.findOne(+id);
   }
 
   @Put(':id')
   update(
-    @Param('id', ParseIntPipe) id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() user: User,
   ): Promise<void> {
-    return this.usersService.update(+id, user);
+    return this._userService.update(+id, user);
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: string) {
-    this.usersService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    this._userService.remove(+id);
     return true;
+  }
+
+  @Post('setRole/:userId/:roleId')
+  async setRoleToUser(
+    @Param('userId', ParseIntPipe) userId: number,
+    @Param('roleId', ParseIntPipe) roleId: number,
+  ) {
+    return await this._userService.setRoleToUser(userId, roleId);
   }
 }
