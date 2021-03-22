@@ -12,9 +12,7 @@ import {
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import { AuthGuard } from '@nestjs/passport';
-import { Roles } from '../role/decorators/role.decorator';
-import { RoleGuard } from '../role/guards/role.guard';
-import { RoleType } from '../role/roletype.enum';
+import { ReadUserDto } from './dto';
 
 @Controller('users')
 export class UsersController {
@@ -27,36 +25,36 @@ export class UsersController {
 
   @UseGuards(AuthGuard())
   @Get()
-  findAll(): Promise<User[]> {
+  findAll(): Promise<ReadUserDto[]> {
     return this._userService.findAll();
   }
 
-  @Get(':id')
+  @Get(':userId')
   //@Roles(RoleType.ADMIN)
   //@UseGuards(AuthGuard(),RoleGuard)
-  findOne(@Param('id', ParseIntPipe) id: number): Promise<User> {
+  findOne(@Param('userId', ParseIntPipe) id: number): Promise<ReadUserDto > {
     return this._userService.findOne(+id);
   }
 
-  @Put(':id')
+  @Put(':userId')
   update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('userId', ParseIntPipe) userId: number,
     @Body() user: User,
-  ): Promise<void> {
-    return this._userService.update(+id, user);
+  ): Promise<ReadUserDto> {
+    return this._userService.update(+userId, user);
   }
 
-  @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
-    this._userService.remove(+id);
-    return true;
+  @Delete(':userId')
+  remove(@Param('userId', ParseIntPipe) userId: number):Promise<void> {
+    return this._userService.remove(+userId);
+    
   }
 
   @Post('setRole/:userId/:roleId')
   async setRoleToUser(
     @Param('userId', ParseIntPipe) userId: number,
     @Param('roleId', ParseIntPipe) roleId: number,
-  ) {
+  ): Promise<boolean> {
     return await this._userService.setRoleToUser(userId, roleId);
   }
 }
