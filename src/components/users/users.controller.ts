@@ -14,6 +14,7 @@ import { User } from './entities/user.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { Roles } from '../role/decorators/role.decorator';
 import { RoleGuard } from '../role/guards/role.guard';
+import { RoleType } from '../role/roletype.enum';
 
 @Controller('users')
 export class UsersController {
@@ -31,8 +32,8 @@ export class UsersController {
   }
 
   @Get(':id')
-  @Roles('ADMINI')
-  @UseGuards(AuthGuard(),RoleGuard)
+  //@Roles(RoleType.ADMIN)
+  //@UseGuards(AuthGuard(),RoleGuard)
   findOne(@Param('id', ParseIntPipe) id: number): Promise<User> {
     return this._userService.findOne(+id);
   }

@@ -5,11 +5,10 @@ import { UsersController } from './users.controller';
 import { UserRepository } from './entities/user.repository';
 
 // modules
-import { SharedModule } from '../../@shared/shared.module';
 import { AuthModule } from '../auth/auth.module';
 import { RoleRepository } from '../role/entities/role.repository';
 
-const MODULES = [SharedModule, AuthModule];
+const MODULES = [AuthModule];
 
 @Module({
   controllers: [UsersController],

@@ -1,17 +1,16 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 
 // modules
 import { ConfigModule } from './@core/config/config.module';
-import { SharedModule } from './@shared/shared.module';
 import { CoreModule } from './@core/core.module';
 import { ComponentsModule } from './components/components.module';
+
+// config
 import { Configuration } from './@core/config/config.keys';
 import { ConfigService } from './@core/config/config.service';
 
 //controllers list
-const MODULES = [CoreModule, SharedModule, ConfigModule, ComponentsModule];
+const MODULES = [CoreModule, ConfigModule, ComponentsModule];
 //controllers list
 const CONTROLLERS = [];
 
@@ -20,8 +19,8 @@ const PROVIDERS = [];
 
 @Module({
   imports: [...MODULES],
-  controllers: [AppController, ...CONTROLLERS],
-  providers: [AppService, ...PROVIDERS],
+  controllers: [...CONTROLLERS],
+  providers: [...PROVIDERS],
 })
 export class AppModule {
   static port: number | string;
